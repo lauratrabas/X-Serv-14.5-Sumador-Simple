@@ -14,7 +14,7 @@ while True:
 	print 'HTTP request received'
 	peticion = recvSocket.recv(1301)
 	try:
-		entero = peticion.split()[1][1:]
+		entero = int(peticion.split()[1][1:])
 	except KeyError:
 		continue
 	
@@ -24,10 +24,10 @@ while True:
 		recvSocket.send('El primer numero es: </p>' + str(entero))
 		recvSocket.send('<p>Introduzca su segundo numero')
 		recvSocket.send("</body><html>" + "\r\n")
-		numero1 = int(entero)
+		numero1 = entero
 		numero = False
 	else:
-		suma = numero1 + int(entero)
+		suma = numero1 + entero
 		recvSocket.send("HTTP/1.1 200 OK\r\n\r\n")
 		recvSocket.send("<body><html>")
 		recvSocket.send(str(numero1) + '+' + str(entero) + '</p>')
